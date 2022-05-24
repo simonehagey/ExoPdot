@@ -1,0 +1,100 @@
+\begin{deluxetable}{cllcl}
+\tabletypesize{\footnotesize}
+\tablecolumns{5}
+\tablewidth{0pt}
+\tablecaption{HAT-P-32 Data}
+\tablehead{\colhead{Epoch} & \colhead{Transit Center} & \colhead{Error} & \colhead{Data Quality} & \colhead{Observer}}
+\vspace{-0.2cm}
+\startdata
+0 & 2454420.44559685 & 9e-05 & 1 & J. D. Hartman et al., 2011 \\
+640 & 2455796.44895 & 0.001 & 3 & Moudrá M., Sobotka P. \\
+640 & 2455796.4534 & 0.00085 & 3 & Zibar M. \\
+640 & 2455796.4542 & 0.00058 & 2 & Trnka J. \\
+666 & 2455852.35064 & 0.00072 & 2 & Brosio A. \\
+668 & 2455856.65115 & 0.00026 & 1 & Dax T. \\
+668 & 2455856.65133 & 0.00029 & 1 & Shadic S. \\
+668 & 2455856.65194 & 0.00058 & 2 & Yafunyaev M. \\
+669 & 2455858.80174 & 0.00027 & 1 & Shadic S. \\
+670 & 2455860.95194 & 0.00035 & 1 & Shadick S. \\
+679 & 2455880.30118 & 0.0004 & 1 & Corfini G. \\
+689 & 2455901.80231 & 0.0007 & 3 & Parijat Singh \\
+694 & 2455912.54846 & 0.00125 & 3 & Naves R. \\
+708 & 2455942.65344 & 0.00059 & 2 & Zaharevitz D. \\
+820 & 2456183.45194 & 0.00063 & 2 & Arena C. \\
+820 & 2456183.45303 & 0.00044 & 1 & Ayiomamitis A. \\
+821 & 2456185.60561 & 0.00106 & 3 & Naves R. \\
+833 & 2456211.40774 & 0.00087 & 3 & Emering F. \\
+841 & 2456228.60274 & 0.0006 & 2 & Carre&#241 \\
+843 & 2456232.904 & 0.00031 & 1 & Kehusmaa P., Harlingten C. \\
+846 & 2456239.35428 & 0.00054 & 1 & Horta F. G. \\
+853 & 2456254.40142 & 0.00058 & 2 & Naves R. \\
+873 & 2456297.39888 & 0.00067 & 2 & Ramon Naves \\
+873 & 2456297.40374 & 0.00094 & 3 & Ferran Grau Horta \\
+974 & 2456514.5553 & 0.00065 & 2 & Horta F. G. \\
+980 & 2456527.45525 & 0.0003 & 1 & Hentunen V. P. \\
+994 & 2456557.55435 & 0.00055 & 2 & Salto J. L. \\
+994 & 2456557.55443 & 0.00053 & 2 & E. Herrero & G. Pascual \\
+1007 & 2456585.5041 & 0.00028 & 1 & Benishek V. \\
+1014 & 2456600.55495 & 0.0004 & 1 & Benni P. \\
+1021 & 2456615.60703 & 0.00034 & 1 & Perchak M. \\
+1022 & 2456617.75493 & 0.00047 & 2 & Shadic S. \\
+1033 & 2456641.40453 & 0.00055 & 2 & Naves R. \\
+1040 & 2456656.45466 & 0.00042 & 1 & Zibar M. \\
+1040 & 2456656.4568 & 0.0006 & 2 & Naves R. \\
+1066 & 2456712.35569 & 0.00052 & 2 & Zibar M. \\
+1168 & 2456931.65515 & 0.00064 & 2 & Andrew Wilson \\
+1180 & 2456957.45517 & 0.00063 & 2 & Audejean M. \\
+1181 & 2456959.60563 & 0.00025 & 1 & Coline Guyot Julien Dibon \\
+1187 & 2456972.50511 & 0.00068 & 2 & Ferran Grau Horta \\
+1199 & 2456998.3061 & 0.00031 & 1 & Mark Salisbury \\
+1206 & 2457013.3566 & 0.00039 & 1 & Fran Campos \\
+1314 & 2457245.55763 & 0.00034 & 1 & Marc Bretton \\
+1341 & 2457303.60583 & 0.00046 & 1 & Florian Signoret \\
+1359 & 2457342.30352 & 0.00056 & 2 & Marc Bretton \\
+1359 & 2457342.30837 & 0.00051 & 1 & Marc Bretton \\
+1373 & 2457372.40819 & 0.0007 & 2 & David Molina \\
+1379 & 2457385.30541 & 0.00088 & 3 & Marc Bretton \\
+1379 & 2457385.3085 & 0.00019 & 1 & Marc Bretton \\
+1379 & 2457385.30877 & 0.00022 & 1 & Marc Bretton \\
+1483 & 2457608.91244 & 0.00068 & 2 & Sean Curry \\
+1483 & 2457608.91298 & 0.00057 & 2 & Sean Curry \\
+1507 & 2457660.5083 & 0.0005 & 2 & Rene Roy \\
+1507 & 2457660.50884 & 0.00048 & 1 & Marc DELDEM \\
+1509 & 2457664.80952 & 0.0018 & 3 & Martin Fowler \\
+1520 & 2457688.45777 & 0.00024 & 1 & Mark Salisbury \\
+1522 & 2457692.76124 & 0.00049 & 2 & Michael Fleenor \\
+1522 & 2457692.76382 & 0.00162 & 3 & Martin Fowler \\
+1537 & 2457725.00852 & 0.00018 & 1 & Wonseok Kang \\
+1553 & 2457759.40799 & 0.0005 & 1 & Veli-Pekka Hentunen \\
+1559 & 2457772.30968 & 0.00025 & 1 & Marc Bretton \\
+1667 & 2458004.51082 & 0.0005 & 1 & Ferran Grau Horta \\
+1675 & 2458021.71013 & 0.00025 & 1 & O. Cooper, E. Helou, J. Lowenthal, R. O’Connor, E. Papineau, A. Peck, L. Stephens, K. Walker \\
+1706 & 2458088.36032 & 0.00034 & 1 & Pere Guerra \\
+1840 & 2458376.4622 & 0.00051 & 1 & Gerald Rousseau \\
+1853 & 2458404.41167 & 0.00077 & 3 & Patrick Sogorb \\
+1854 & 2458406.56208 & 0.00043 & 1 & Veli-Pekka Hentunen \\
+1856 & 2458410.86227 & 0.00031 & 1 & Brennan Rodgers and Rina Rast \\
+1873 & 2458447.41702 & 0.00056 & 2 & Yves Jongen \\
+1893 & 2458490.41094 & 0.00048 & 1 & STEPHANE FERRATFIAT DAGOT \\
+1899 & 2458503.31222 & 0.00034 & 1 & Yves Jongen \\
+1906 & 2458518.36168 & 0.00069 & 3 & Didier Laloum  \\
+2007 & 2458735.51399 & 0.00029 & 1 & Yves Jongen \\
+2047 & 2458821.51277 & 0.00044 & 1 & Yves Jongen \\
+2059 & 2458847.31093 & 0.00047 & 1 & Juergen Dirscherl \\
+2060 & 2458849.46341 & 0.00035 & 1 & Yves Jongen \\
+2066 & 2458862.36309 & 0.0004 & 1 & Yves Jongen \\
+2180 & 2459107.4611 & 0.00086 & 3 & Roman Ehrenberger \\
+2180 & 2459107.46498 & 0.00058 & 2 & Jordi Lopesino \\
+2186 & 2459120.36309 & 0.00056 & 2 & Veli-Pekka Hentunen \\
+2201 & 2459152.61566 & 0.00038 & 1 & Yves Jongen \\
+2213 & 2459178.41447 & 0.00079 & 2 & Fabio Mortari \\
+2213 & 2459178.41539 & 0.00038 & 1 & Nicholas Dahlke, Johanna Hipp, Annalotta Hipp \\
+2219 & 2459191.31388 & 0.00028 & 1 & Veli-Pekka Hentunen \\
+2222 & 2459197.76228 & 0.00135 & 3 & Roger Dymock \\
+2233 & 2459221.41336 & 0.00073 & 2 & Snaevarr Gudmundsson \\
+2354 & 2459481.56272 & 0.00055 & 2 & Yves Jongen \\
+2366 & 2459507.36542 & 0.00018 & 1 & Anaël Wünsche \\
+\enddata
+\vspace{0.02cm}
+\tablecomments{These are comments on the table}
+\end{deluxetable}
