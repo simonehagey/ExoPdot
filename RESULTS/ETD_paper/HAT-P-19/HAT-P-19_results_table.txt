@@ -1,0 +1,34 @@
+\begin{deluxetable*}{lcccc}
+\tablecolumns{5}
+\tablewidth{0pt}
+\tablecaption{HAT-P-19 Results}
+\tablehead{\colhead{Parameter} & \colhead{Symbol} & \colhead{Unit} & \colhead{Value} & \colhead{Uncertainty (1-$\sigma$)}}
+\startdata
+\sidehead{\textbf{Constant Period Model}}
+Transit Center & $t_{0}$ & HJD & $2455091.5337377447$ & $^{+0.00010041799396276474}_{-0.00010118028149008751}$ \vspace{0.1cm} \\ 
+Period & $P$ & days & $4.008784010914376$ & $^{+1.4547992233104878e-07}_{-1.4403815118413377e-07}$ \vspace{0.1cm} \\
+Number of Data & $n$ & & $72$ \vspace{0.1cm} \\ 
+Degrees of Freedom & $k$ & & $2$ \vspace{0.1cm} \\ 
+Chi-Square Statistic & $\chi^2$ & & $257.7$ \vspace{0.1cm} \\
+Bayesian Information Criterion & $BIC$ & & $266.3$ \vspace{0.1cm} \\ 
+\sidehead{\textbf{Orbital Decay Model}}
+Transit Center & $t_{0}$ & HJD & $2455091.532816137$ & $^{+0.00014507118612527847}_{-0.00014819065108895302}$ \vspace{0.1cm} \\
+Period & $P$ & days & $4.008788694442547$ & $^{+5.62468238207714e-07}_{-5.477881384052807e-07}$ \vspace{0.1cm} \\
+Decay Rate & $dP/dE$ & days/epoch & $-8.217531927522039e-09$ & $^{+9.250899467995015e-10}_{-9.459493639545322e-10}$ \vspace{0.1cm} \\
+Decay Rate & $dP/dt$ & ms/yr & $-64.69$ & $^{+7.28}_{-7.45}$ \vspace{0.1cm} \\ 
+Degrees of Freedom & $k$ & & $3$ \vspace{0.1cm} \\ 
+Chi-Square Statistic & $\chi^2$ & & $217.7$ \vspace{0.1cm} \\
+Bayesian Information Criterion & $BIC$ & & $230.5$ \vspace{0.1cm} \\ 
+\sidehead{\textbf{Apsidal Precession Model}}
+Transit Center & $t_{0}$ & HJD & $2455091.525056159$ & $^{+0.001195952296257019}_{-0.0009091640822589397}$ \vspace{0.1cm} \\
+Sidereal Period & $P_s$ & days & $4.0087839789757655$ & $^{+1.5839244138504682e-07}_{-1.5798980346204416e-07}$ \vspace{0.1cm} \\
+Argument of Periastron & $\omega_{0}$ & rad & $2.606397836634278$ & $^{+0.03955430854867181}_{-0.03653887864777028}$ \vspace{0.1cm} \\ 
+Precession Rate & $d\omega/dE$ & rad/epoch & $0.0009335813512263481$ & $^{+4.371682864356334e-05}_{-5.6265735500529625e-05}$  \vspace{0.1cm} \\
+Eccentricity & $e$ & & $0.007124982777922548$ & $^{+0.00071760069057622}_{-0.0009642668312042565}$ \vspace{0.1cm} \\
+Degrees of Freedom & $k$ & & $5$ \vspace{0.1cm} \\ 
+Chi-Square Statistic & $\chi^2$ & & $217.7$ \vspace{0.1cm} \\
+Bayesian Information Criterion & $BIC$ & & $239.1$ \vspace{0.1cm} \\ 
+\enddata
+\vspace{0.02cm}
+\tablecomments{These are comments on the table}
+\end{deluxetable*}
