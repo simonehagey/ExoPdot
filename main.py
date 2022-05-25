@@ -7,11 +7,11 @@ import fitModels
 
 """
 This is the main script for running the analysis that compares the constant period, orbital decay, and
-apsidal precession transit timing models. - more info needed
+apsidal precession transit timing models. All relevant settings can be changed in the "settings-example.json" file.
 """
 
 # open settings file
-settings_file = "settings.json"
+settings_file = "settings-example.json"
 with open(settings_file) as json_file:
     settings = json.load(json_file)
 
@@ -45,14 +45,14 @@ for target in targets:
     data = (epochs, observations, errs)
 
     # do an initial fit of just constant period and orbital decay models
-    initial_fit = fitModels.fitAll(data, niter, burn_in, planetinfo, save_directory, False, all_plots)
+    initial_fit = fitModels.fitAll(data, [100000, 100000, 0], [10000, 10000, 0], planetinfo, save_directory, False, all_plots)
     epochs, observations, errs = initial_fit["DATA"]
     data = (epochs, observations, errs)
 
     # running the sigma clipping algorithm (if desired)
     max_iters = 20
     if iterate == True:
-        iter_fit = fitModels.iterate(initial_fit, max_iters, niter, burn_in, planetinfo, save_directory)
+        iter_fit = fitModels.iterate(initial_fit, max_iters, [100000, 100000, 0], [10000, 10000, 0], planetinfo, save_directory)
         epochs, observations, errs = iter_fit["DATA"]
         data = (epochs, observations, errs)
 
