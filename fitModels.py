@@ -65,8 +65,8 @@ def fitAll(data, niter, burn_in, planetinfo, directory, fit_precess=False, diagn
     # define parameters for MCMC
     variables_P = [0, 1, 2, 3, 4]                       # which variables to fit (t0-0, P0-1, e-2, w0-3, wdE-4)
     widths_P = [0.0001, 0.0000001, 0.0, 0.05, 0.0]      # step-widths
-    limits_P = [(results_L[0][0] - 0.05, results_L[0][0] + 0.05),   # parameter limits
-                (results_L[0][1] - 0.05, results_L[0][1] + 0.05),
+    limits_P = [(results_L[0][0] - 0.01, results_L[0][0] + 0.01),   # parameter limits
+                (results_L[0][1] - 0.1, results_L[0][1] + 0.1),
                 (0.00001, 0.1),                                     # 1e-5 < eccentricity < 1e-1
                 (0, 2 * np.pi),                                     # 0 < phase < 2pi
                 (0.000001, 0.001)]                                  # 1e-6 < precession rate < 1e-3
