@@ -10,7 +10,7 @@ orbital period, but the orbit is precessing. The best-fit models are found throu
 (with a Gibbs sampler) and compared via the Bayesian Information Criterion (BIC). As described in the paper, 
 an (optional) iterative sigma-clipping algorithm is incorporated into the pipeline to handle the exclusion of spurious data points. 
 
-#### Data
+### Data
 
 All data used for this paper is from the [Exoplanet Transit Database (ETD)](http://var2.astro.cz/ETD/index.php).
 If you are using it for your research please be sure to cite the database appropriately.
@@ -51,7 +51,7 @@ The repository contains 7 Python scripts in addition to the transit timing data 
 is designed to be fully encapsulated in the *main.py* script, so changes do not need to be made to other files unless 
 you want to experiment with adjusting the bounds on parameters in the MCMC routines in the *fitModels.py* script.
 
-#### Settings file
+### Settings file
 
 Inside *main.py* you may specify the name of the "settings" .json file that define the planets, directories, and model 
 fitting and plotting parameters. The default is *settings-example.json* which runs a simple WASP-12 b example. 
@@ -84,12 +84,12 @@ end of the routine.
 ...
 ```
 
-#### System Info Files
+### System Info Files
 All of the necessary information (and more) on the 30 star-planet systems investigated in this study are contained in separate
 files in the ~/SYSTEM_FILES/ directory. For this project, only the reference transit time "tc", orbital period "p", and coordinates "RA"
 and "DEC" were used. This system will be modified in future iterations to be a single file with updated orbital elements.
 
-#### Outputs
+## Outputs
 
 Running *main.py* automatically generates - for every planet - an O-C plot, text file displaying the printed 
 model fitting and comparison results, saved copies of the MCMC posterior chains, and a "results" .json file. This
