@@ -10,21 +10,18 @@ def model(s, epochs):
     Defines quadratic transit timing model (for orbital decay)
     """
     t0, P0, PdE = s
-    tcs = []
-    for E in epochs:
-        tcs.append(t0 + P0 * E + (1 / 2) * (E ** 2) * PdE)
+    tcs = [t0 + P0 * E + (1 / 2) * (E ** 2) * PdE for E in epochs]
     return np.array(tcs)
 
-def draw(limits, s, variable_ind, widths):
+def draw(limits, s, i, widths):
     """
     Draw variables for a new trial (uniform priors)
     """
     new_state = s.copy()
-    for i in variable_ind:
-        v = np.random.normal(s[i], widths[i])        # draw new variable
-        while v < limits[i][0] or v > limits[i][1]:  # check if within limits
-            v = np.random.normal(s[i], widths[i])
-        new_state[i] = v
+    v = np.random.normal(s[i], widths[i])        # draw new variable
+    while v < limits[i][0] or v > limits[i][1]:  # check if within limits
+        v = np.random.normal(s[i], widths[i])
+    new_state[i] = v
     return new_state
 
 def evaluate(data, pstate, iter, chi2_0):
@@ -62,7 +59,7 @@ def main(data, initial_state, burn_in, limits, niter, variables, widths, directo
 
         for var in variables:
             c = current_state.copy()
-            proposal_state = draw(limits, c, [var], widths)
+            proposal_state = draw(limits, c, var, widths)
             alpha, chi2_old, chi2_new = evaluate(data, proposal_state, iteration, chi20)
 
             if utils.random_coin(alpha):
@@ -114,23 +111,21 @@ def confidence(full_chain):
 
 def plots(CHAIN, directory):
 
-    plt.plot(CHAIN[:, 0])
-    plt.title("t0")
-    plt.savefig(directory+"_decay_t0")
-    plt.close()
+    labels=["t0","P0","PdE"]
+    conv = (365.25 * 24. * 3600. * 1e3) / np.mean(CHAIN[:, 1])
+
+    fig, ax = plt.subplots(4, sharex=True)
+    for i in range(len(labels)):
+        ax[i].plot(CHAIN[:, i])
+        ax[i].set_ylabel(labels[i])
+
+    ax[3].plot(CHAIN[:, i]*conv)
+    ax[3].set_ylabel("PdT")
+    plt.xlabel("iteration")
+    plt.savefig(directory + "_decay_trace")
     plt.close()
 
-    plt.plot(CHAIN[:, 1])
-    plt.title("P0")
-    plt.savefig(directory+"_decay_P0")
-    plt.close()
-
-    plt.plot(CHAIN[:, 2])
-    plt.title("PdE")
-    plt.savefig(directory+"_decay_PdE")
-    plt.close()
-
-    corner.corner(CHAIN, labels=["t0","P0","PdE"], quantiles=[0.16, 0.5, 0.84],
+    corner.corner(CHAIN, labels=labels, quantiles=[0.16, 0.5, 0.84],
                   show_titles=True, title_kwargs={"fontsize": 12})
     plt.savefig(directory+"_decay_corner")
     plt.close()

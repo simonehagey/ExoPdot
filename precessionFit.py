@@ -11,14 +11,14 @@ def model(s, epochs):
     Defines apsidal precession transit timing model
     """
     t0, Ps, e, w0, wdE = s
-    tcs = []
-    for E in range(len(epochs)):
-        omega = w0 + epochs[E] * wdE
-        Pa = Ps / (1 - wdE / (2 * np.pi))
-        tcs.append(t0 + Ps * epochs[E] - (e * Pa / np.pi) * np.cos(omega))
+    tcs = [t0 + Ps*E - (e*(Ps / (1 - wdE / (2 * np.pi))) / np.pi) * np.cos(w0 + E * wdE) for E in epochs]
+    # for E in range(len(epochs)):
+    #     omega = w0 + epochs[E] * wdE
+    #     Pa = Ps / (1 - wdE / (2 * np.pi))
+    #     tcs.append(t0 + Ps * epochs[E] - (e * Pa / np.pi) * np.cos(omega))
     return np.array(tcs)
 
-def draw(limits, s, variable_ind, widths, linear_results, linear_sig):
+def draw(limits, s, i, widths, linear_results, linear_sig):
     """
     Draw variables for a new trial, priors are:
         t0 (reference transit time) - uniform prior
@@ -28,42 +28,41 @@ def draw(limits, s, variable_ind, widths, linear_results, linear_sig):
         wdE (precession rate /epoch) - log-uniform prior
     """
     new_state = s.copy()
-    for i in variable_ind:
-        if i == 0:  # t0
+    if i == 0:  # t0
+        v = np.random.normal(s[i], widths[i])
+        while v < limits[i][0] or v > limits[i][1]:
             v = np.random.normal(s[i], widths[i])
-            while v < limits[i][0] or v > limits[i][1]:
-                v = np.random.normal(s[i], widths[i])
 
-        if i == 1:  # P_s
-            means = np.array([s[i],linear_results[1]])
-            cov = [[widths[i]**2,0],
-                   [0,linear_sig[1]**2]]
+    if i == 1:  # P_s
+        means = np.array([s[i],linear_results[1]])
+        cov = [[widths[i]**2,0],
+               [0,linear_sig[1]**2]]
+        v = rand.multivariate_normal(means, cov)[1]
+        while v < limits[i][0] or v > limits[i][1]:
             v = rand.multivariate_normal(means, cov)[1]
-            while v < limits[i][0] or v > limits[i][1]:
-                v = rand.multivariate_normal(means, cov)[1]
 
-        if i == 2:  # e
+    if i == 2:  # e
+        p = np.random.normal(np.log10(s[i]), 0.02)
+        v = 10**p
+        while v < limits[i][0] or v > limits[i][1]:
             p = np.random.normal(np.log10(s[i]), 0.02)
-            v = 10**p
-            while v < limits[i][0] or v > limits[i][1]:
-                p = np.random.normal(np.log10(s[i]), 0.02)
-                v = 10 ** p
+            v = 10 ** p
 
-        if i == 3:  # w0
+    if i == 3:  # w0
+        v = np.random.normal(s[i], widths[i])
+        v = utils.wrap(v)
+        while v < limits[i][0] or v > limits[i][1]:
             v = np.random.normal(s[i], widths[i])
             v = utils.wrap(v)
-            while v < limits[i][0] or v > limits[i][1]:
-                v = np.random.normal(s[i], widths[i])
-                v = utils.wrap(v)
 
-        if i == 4:  # wdE
+    if i == 4:  # wdE
+        p = np.random.normal(np.log10(s[i]), 0.03)
+        v = 10 ** p
+        while v < limits[i][0] or v > limits[i][1]:
             p = np.random.normal(np.log10(s[i]), 0.03)
             v = 10 ** p
-            while v < limits[i][0] or v > limits[i][1]:
-                p = np.random.normal(np.log10(s[i]), 0.03)
-                v = 10 ** p
 
-        new_state[i] = v
+    new_state[i] = v
     return new_state
 
 def evaluate(data, pstate, iter, chi2_0):
@@ -81,7 +80,7 @@ def evaluate(data, pstate, iter, chi2_0):
     elif chi2_0 > chi2:
         alpha = 1.0
     else:
-        alpha = np.exp((chi2_0-chi2))
+        alpha = np.exp(chi2_0-chi2)
 
     return alpha, chi2_0, chi2
 
@@ -102,7 +101,7 @@ def main(data, initial_state, burn_in, limits, niter, variables, widths, linear_
 
         for var in variables:
             c = current_state.copy()
-            proposal_state = draw(limits, c, [var], widths, linear_results, linear_sig)
+            proposal_state = draw(limits, c, var, widths, linear_results, linear_sig)
             alpha, chi2_old, chi2_new = evaluate(data, proposal_state, iteration, chi20)
 
             if utils.random_coin(alpha):
@@ -117,12 +116,12 @@ def main(data, initial_state, burn_in, limits, niter, variables, widths, linear_
                 chi20 = chi2_old
             iteration +=1
 
-    # print("total acceptance ratio:", accepted/(len(variables)*niter))
-    # print("t0 acceptance ratio:", var_accepted[0] / niter)
-    # print("P0 acceptance ratio:", var_accepted[1] / niter)
-    # print("e acceptance ratio:", var_accepted[2] / niter)
-    # print("w0 acceptance ratio:", var_accepted[3] / niter)
-    # print("wdE acceptance ratio:", var_accepted[4] / niter)
+    print("total acceptance ratio:", accepted/(len(variables)*niter))
+    print("t0 acceptance ratio:", var_accepted[0] / niter)
+    print("P0 acceptance ratio:", var_accepted[1] / niter)
+    print("e acceptance ratio:", var_accepted[2] / niter)
+    print("w0 acceptance ratio:", var_accepted[3] / niter)
+    print("wdE acceptance ratio:", var_accepted[4] / niter)
 
     chain = np.array(chain)
     thinned_chain = chain[::len(variables)]
@@ -148,6 +147,9 @@ def confidence(full_chain):
     upper = np.array([q_t0[2],q_P[2],q_e[2],q_w0[2],q_wdE[2]])
     upper = upper-vals
 
+    plt.hist(full_chain[:,0])
+    plt.show()
+
     print("t0: ",str(vals[0]),"+",str(upper[0]),"-",str(lower[0]))
     print("P: ", str(vals[1]), "+", str(upper[1]), "-", str(lower[1]))
     print("e: ", str(vals[2]), "+", str(upper[2]), "-", str(lower[2]))
@@ -157,32 +159,17 @@ def confidence(full_chain):
 
 def plots(CHAIN, directory):
 
-    plt.plot(CHAIN[:, 0])
-    plt.title("t0")
-    plt.savefig(directory+"_precession_t0")
+    labels = ["t0", "Ps", "e", "w0", "wdE"]
+
+    fig, ax = plt.subplots(len(labels), sharex=True)
+    for i in range(len(ax)):
+        ax[i].plot(CHAIN[:, i])
+        ax[i].set_ylabel(labels[i])
+    plt.xlabel("iteration")
+    plt.savefig(directory+"_precession_trace")
     plt.close()
 
-    plt.plot(CHAIN[:, 1])
-    plt.title("P0")
-    plt.savefig(directory+"_precession_P0")
-    plt.close()
-
-    plt.plot(CHAIN[:, 2])
-    plt.title("e")
-    plt.savefig(directory+"_precession_e")
-    plt.close()
-
-    plt.plot(CHAIN[:, 3])
-    plt.title("w0")
-    plt.savefig(directory+"_precession_w0")
-    plt.close()
-
-    plt.plot(CHAIN[:, 4])
-    plt.title("wdE")
-    plt.savefig(directory+"_precession_wdE")
-    plt.close()
-
-    corner.corner(np.array(CHAIN[:,[0,1,2,3,4]]), labels=["t0", "P0","e", "w0", "wdE"], quantiles=[0.16, 0.5, 0.84],
+    corner.corner(np.array(CHAIN[:,[0,1,2,3,4]]), labels=labels, quantiles=[0.16, 0.5, 0.84],
                   show_titles=True, title_kwargs={"fontsize": 12})
     plt.savefig(directory+"_precession_corner")
     plt.close()
