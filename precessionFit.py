@@ -147,9 +147,6 @@ def confidence(full_chain):
     upper = np.array([q_t0[2],q_P[2],q_e[2],q_w0[2],q_wdE[2]])
     upper = upper-vals
 
-    plt.hist(full_chain[:,0])
-    plt.show()
-
     print("t0: ",str(vals[0]),"+",str(upper[0]),"-",str(lower[0]))
     print("P: ", str(vals[1]), "+", str(upper[1]), "-", str(lower[1]))
     print("e: ", str(vals[2]), "+", str(upper[2]), "-", str(lower[2]))
