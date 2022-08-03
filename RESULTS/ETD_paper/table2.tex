@@ -1,0 +1,23 @@
+\begin{deluxetable*}{lcccc}
+\tablecolumns{5}
+\tablewidth{0pt}
+\tablecaption{\textcolor{red}{MCMC Priors}}
+\label{table:priors}
+\tablehead{\colhead{Parameter} & \colhead{Symbol} & \colhead{Unit} & \colhead{Prior} & \colhead{Bounds}}
+\startdata
+\sidehead{\textbf{Constant Period Model}}
+Transit Center & $t_{0}$ & BJD$_{\rm TDB}$ & Uniform & $(t_{ref}-1,t_{ref}+1)$ \vspace{0.05cm} \\ 
+Period & $P$ & days & Uniform & $(P_{ref}-1,P_{ref}+1)$ \vspace{0.01cm} \\
+\sidehead{\textbf{Orbital Decay Model}}
+Transit Center & $t_{0}$ & BJD$_{\rm TDB}$ & Uniform & $(t_{best}-1,t_{best}+1)$ \vspace{0.05cm} \\
+Period & $P$ & days & Uniform & $(P_{best}-1,P_{best}+1)$ \vspace{0.05cm} \\
+Decay Rate & $dP/dE$ & days/epoch & Uniform & $(\num{-1e-7},\num{1e-7})$ \vspace{0.01cm} \\
+\sidehead{\textbf{Apsidal Precession Model}}
+Transit Center & $t_{0}$ & BJD$_{\rm TDB}$ & Uniform & $(t_{best}-a,t_{best}+a),a\in\{.01,.1\}$ \vspace{0.05cm} \\
+Sidereal Period & $P_s$ & days & Normal & $(P_{best}-0.1,P_{best}+0.1)$ \vspace{0.05cm} \\
+Argument of Periastron & $\omega_{0}$ & rad & Uniform & $(0,2\pi)$ \vspace{0.05cm} \\ 
+Precession Rate & $d\omega/dE$ & rad/epoch & Log-Uniform & $(\num{1e-6},\num{1e-3})$  \vspace{0.05cm} \\
+Eccentricity & $e$ & & Log-Uniform & $(\num{1e-5},\num{1e-1})$ \vspace{0.1cm} \\
+\enddata
+\vspace{0.02cm}\tablecomments{The parameters $t_{ref}$ and $P_{ref}$ are the reference ephemeris from the literature, whereas $t_{best}$ and $P_{best}$ are the best-fit values from sampling the constant period model. For the constant period and orbital decay models the bounds on $t_0$ and $P$ are generous to allow for exploration of a large parameter space, as there were no issues with converging on multiple solutions. The restrictions on the apsidal precession priors are discussed in section \ref{sec:modelfitting}}
+\end{deluxetable*}
