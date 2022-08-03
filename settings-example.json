@@ -7,8 +7,8 @@
   "_comment1":"settings for model fitting",
   "sigma_clip":1,
   "fit_precession":0,
-  "niter":[500000,500000,500000],
-  "burn_in":[50000,50000,50000],
+  "niter":[1000000,1000000,1000000],
+  "burn_in":[100000,100000,100000],
 
   "_comment2":"settings for plotting",
   "pre_baseline_extension":500,
