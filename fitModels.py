@@ -18,8 +18,8 @@ def fitAll(data, niter, burn_in, planetinfo, directory, fit_precess=False, diagn
     # extract data, number of MCMC iterations, and number of burn-in iterations
     epochs, observations, errs = data
     niter_L, niter_D, niter_P = niter
-    burn_L, burn_D, burn_P = burn_in        # ToDo: include fitting eclipses
-                                            # ToDo: combine 3 models into one MCMC
+    burn_L, burn_D, burn_P = burn_in
+
 
     """
     Fit linear model
@@ -27,7 +27,8 @@ def fitAll(data, niter, burn_in, planetinfo, directory, fit_precess=False, diagn
     # define parameters for MCMC
     variables_L = [0,1]                     # which variables to fit (t0-0, P0-1)
     widths_L = [0.0001, 0.0000001]          # step-widths
-    limits_L = [(t0-1,t0+1),(P0-1,P0+1)]    # parameter limits
+    limits_L = [(t0-0.5,t0+0.5),
+                (P0-0.5,P0+0.5)]    # parameter limits
     init_L = [t0, P0]  # initial constant-period model parameters
 
     # fit constant period model
@@ -44,7 +45,9 @@ def fitAll(data, niter, burn_in, planetinfo, directory, fit_precess=False, diagn
     # define parameters for MCMC
     variables_D = [0, 1, 2]    # which variables to fit (t0-0, P0-1, PdE-2)
     widths_D = [0.0001, 0.0000001, 1e-10]
-    limits_D = [(results_L[0][0]-1,results_L[0][0]+1),(results_L[0][1]-1,results_L[0][1]+1),(-1e-7,1e-7)]
+    limits_D = [(results_L[0][0]-0.5,results_L[0][0]+0.5),
+                (results_L[0][1]-0.5,results_L[0][1]+0.5),
+                (-1e-7,1e-7)]
     init_D = [results_L[0][0], results_L[0][1], 0.0]
 
     # fit orbital decay model
@@ -64,7 +67,7 @@ def fitAll(data, niter, burn_in, planetinfo, directory, fit_precess=False, diagn
 
     # define parameters for MCMC
     variables_P = [0, 1, 2, 3, 4]                       # which variables to fit (t0-0, P0-1, e-2, w0-3, wdE-4)
-    widths_P = [0.0001, 0.0000001, 0.0, 0.05, 0.0]      # step-widths
+    widths_P = [0.0001, 0.0000001, 0.0, 0.05, 0.0]
     limits_P = [(results_L[0][0] - 0.01, results_L[0][0] + 0.01),   # parameter limits
                 (results_L[0][1] - 0.1, results_L[0][1] + 0.1),
                 (0.00001, 0.1),                                     # 1e-5 < eccentricity < 1e-1
@@ -82,12 +85,11 @@ def fitAll(data, niter, burn_in, planetinfo, directory, fit_precess=False, diagn
                 tcs.append(t0 + results_L[0][1] * epochs[E] - (e * Pa / np.pi) * np.cos(omega))
             return np.array(tcs)
 
-        # define limits a bit differently so the curve-fit explores more parameter space
-        limits_curvefit = ([results_L[0][0] - 0.01, 0.00001, 0, 0.000001],
-                           [results_L[0][0] + 0.01, 0.1, 2 * np.pi, 0.001])
-
         # use curve_fit to pick appropriate initial precession model parameters
-        popt, pcov = curve_fit(function, epochs, observations, sigma=errs, bounds=limits_curvefit)
+        popt, pcov = curve_fit(function, epochs, observations,
+                               sigma=errs, bounds=([results_L[0][0]-0.01, 0.00001, 0, 0.000001],
+                                                    [results_L[0][0]+0.01, 0.1, 2*np.pi, 0.001]))
+
         init_P = [popt[0], results_L[0][1], popt[1], popt[2], popt[3]]
 
         # saving constant-period model fit and maxmimum period error for precession model MCMC draws
@@ -102,7 +104,8 @@ def fitAll(data, niter, burn_in, planetinfo, directory, fit_precess=False, diagn
         if diagnostic_plots == True:
             precessionFit.plots(chain_P, directory+target)
 
-    precession = precessionFit.model(results_P[0], epochs)  # outside of if-statement in case precession model not fit
+    # outside of if-statement in case precession model not fit
+    precession = precessionFit.model(results_P[0], epochs)
 
     """
     DISPLAY AND SAVE RESULTS
@@ -118,6 +121,7 @@ def fitAll(data, niter, burn_in, planetinfo, directory, fit_precess=False, diagn
     chisquare_precess, BIC_precess = utils.modelCompare(precession, observations, errs, variables_P)
 
     with open(directory + target + "_fit_results.txt", "a") as f:
+        f.write("\n")
         f.write("MODEL COMPARISON:\n")
         f.write("Linear model: "+"chi^2 = "+str(chisquare_linear)+"  BIC = "+str(BIC_linear)+"\n")
         f.write("Decay model: "+"chi^2 = "+str(chisquare_decay)+"  BIC = "+str(BIC_decay)+"\n")

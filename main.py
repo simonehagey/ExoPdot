@@ -19,7 +19,7 @@ with open(settings_file) as json_file:
 targets = settings["targets"]   # do you want to run sigma-clipping algorithm (1-yes, 0-no)
 fit_precess = settings["fit_precession"]    # do you want to fit the precession model (1-yes, 0-no)
 all_plots = settings["diagnostic_plots"]
-iterate = settings["sigma_clip"]   # list of exoplanet target names
+iterate = settings["sigma_clip"]
 niter = settings["niter"]   # number of MCMC iterations (linear, decay, precession)
 burn_in = settings["burn_in"]   # number of MCMC iterations to discard (linear, decay, precession)
 
@@ -41,7 +41,7 @@ for target in targets:
         planetinfo = json.load(json_file)
 
     # load data
-    epochs, observations, errs, types = utils.readData(datafile)
+    epochs, observations, errs, types, observers = utils.readData(datafile)
     data = (epochs, observations, errs)
 
     # do an initial fit of just constant period and orbital decay models

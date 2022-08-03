@@ -19,6 +19,7 @@ def calculateEpoch(t0, P, time, primary=True):
         print("error: invalid observation type")
     return E
 
+
 def helio_to_bary(hjd, RA, DEC):
     """
     Utilizes astropy to convert HJD to BJD
@@ -42,7 +43,7 @@ def bary_to_helio(bjd, RA, DEC):
     """
     Utilizes astropy to convert BJD to HJD
     """
-    bary = time.Time(bjd, scale='tdb', format='jd')
+    bary = time.Time(bjd, scale='utc', format='jd')
     earthcentre = coord.EarthLocation(0., 0., 0.)
     coordinates = coord.SkyCoord(RA, DEC, frame='icrs')
 
@@ -73,7 +74,8 @@ def readData(datafile):
     epochs = np.array(epochs)
     observations = np.array(observations)
     errs = np.array(errs)
-    return epochs, observations, errs, types
+    observers = np.array(observers)
+    return epochs, observations, errs, types, observers
 
 class NpEncoder(json.JSONEncoder):
     """
@@ -153,12 +155,14 @@ def readChains(directory, fit_precess=False):
     """
     chain_L = []
     chain_file_L = directory + "_linear_burnedchain.txt"
+    #chain_file_L = directory + "_linear_fullchain.txt"
     with open(chain_file_L) as infile_L:
         for line in infile_L:
             chain_L.append([float(i) for i in line.split(" ")])
 
     chain_D = []
     chain_file_D = directory + "_decay_burnedchain.txt"
+    #chain_file_D = directory + "_decay_fullchain.txt"
     with open(chain_file_D) as infile_D:
         for line in infile_D:
             chain_D.append([float(i) for i in line.split(" ")])
@@ -166,6 +170,7 @@ def readChains(directory, fit_precess=False):
     chain_P = []
     if fit_precess == True:
         chain_file_P = directory + "_precession_burnedchain.txt"
+        #chain_file_P = directory + "_precession_fullchain.txt"
         with open(chain_file_P) as infile_P:
             for line in infile_P:
                 chain_P.append([float(i) for i in line.split(" ")])

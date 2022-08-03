@@ -141,10 +141,3 @@ def OC(settings_file):
 
         plt.savefig(save_directory+target+"_O-C")
         plt.close()
-
-
-if __name__ == "__main__":
-    settings_file = "settings2.json"
-    OC(settings_file)
-
-
