@@ -22,9 +22,9 @@ uncertainty (days), data quality (DQ) factor, and source/observer.
 
 ```
 #   Epoch   T_mid (HJD)    Unc. (days)  DQ  Source
-1	0	    2455528.86853	0.00014	    1	Hellier et al. 2011
-4	497	    2455933.16473	0.00025	    1	Starr P.
-5	505	    2455939.67475	0.00052	    2	Naves R.
+1   0       2455528.86853   0.00014     1   Hellier et al. 2011
+4   497     2455933.16473   0.00025     1   Starr P.
+5   505     2455939.67475   0.00052     2   Naves R.
 ...
 ```
 
