@@ -113,8 +113,8 @@ def main(data, initial_state, burn_in, limits, niter, variables, widths, linear_
     var_accepted = np.array(var_accepted)/niter
     burned_chain = chain[burn_in:]
     np.savetxt(directory+"_precession_burnedchain.txt", burned_chain)
-    np.savetxt(directory+"_precession_fullchain.txt", chain)
-    np.savetxt(directory + "_precession_accpt_ratios.txt", var_accepted)
+    # np.savetxt(directory+"_precession_fullchain.txt", chain)
+    # np.savetxt(directory + "_precession_accpt_ratios.txt", var_accepted)
 
     return burned_chain
 

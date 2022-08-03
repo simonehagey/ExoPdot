@@ -75,8 +75,8 @@ def main(data, initial_state, burn_in, limits, niter, variables, widths, directo
     var_accepted = np.array(var_accepted)/niter
     burned_chain = chain[burn_in:]
     np.savetxt(directory + "_decay_burnedchain.txt", burned_chain)
-    np.savetxt(directory + "_decay_fullchain.txt", chain)
-    np.savetxt(directory + "_decay_accpt_ratios.txt", var_accepted)
+    # np.savetxt(directory + "_decay_fullchain.txt", chain)
+    # np.savetxt(directory + "_decay_accpt_ratios.txt", var_accepted)
 
     return burned_chain
 
