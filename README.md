@@ -17,14 +17,14 @@ If you are using it for your research please be sure to cite the database approp
  
 Data of all 30 star-planet systems investigated in the study are available in tab-separated .txt files in the ~/DATA/ folder. 
 For the top 10 targets of interest (see paper) we provide datasets that have been manually cleaned of partial 
-transits and duplicate submissions. The columns contain the ETD submission number, epoch, transit center (HJD), 
+transits and duplicate submissions. The columns contain the ETD submission number, epoch, transit center in BJD(TDB), 
 uncertainty (days), data quality (DQ) factor, and source/observer.
 
 ```
 #   Epoch   T_mid (HJD)    Unc. (days)  DQ  Source
-1   0       2455528.86774   0.00014	1   Hellier et al. 2011
-4   497     2455933.16395   0.00025	1   Starr P.
-5   505	    2455939.67397   0.00052	2   Naves R.
+1	0	    2455528.86853	0.00014	    1	Hellier et al. 2011
+4	497	    2455933.16473	0.00025	    1	Starr P.
+5	505	    2455939.67475	0.00052	    2	Naves R.
 ...
 ```
 
@@ -68,7 +68,7 @@ and directory where the results are to be saved.
 ...
 ```
 The second section of the file allows one to choose (1-yes, 0-no) whether to perform the sigma-clipping routine and/or fit the apsidal
-precession model. The precession model is not chosen by default for time considerations. Additionally, the desired number of 
+precession model. The precession model is not chosen by default. Additionally, the desired number of 
 MCMC iterations (total) and number of burn-in iterations can be defined for each model (in the order: linear, decay, precession). 
 Note that for all iterations of the (optional) sigma-clipping routine, the number of MCMC iterations is hardcoded to 100,000
 for efficiency, so in the settings file the user is selecting the number of iterations for the final model fit at the 
@@ -79,8 +79,8 @@ end of the routine.
   "_comment1":"settings for model fitting",
   "sigma_clip":1,
   "fit_precession":0,
-  "niter":[500000,500000,500000],
-  "burn_in":[50000,50000,50000],
+  "niter":[1000000,1000000,1000000],
+  "burn_in":[100000,100000,100000],
 ...
 ```
 
@@ -108,30 +108,30 @@ As a .json file, it is structured like a Python dictionary object, the most crit
 See the *plots.py* script for an example of how to access and use this information if you would like to explore the results
 further than the automatically generated files allow.
 
-![Image](./RESULTS/ETD_paper/WASP-12/WASP-12_O-C.png)
+![Image](./RESULTS/ETD_paper/WASP-12/WASP-12_OCplot.png)
 
 ```
 LINEAR MODEL:
-t0 (transit): 2454508.9780972297 + 4.525342956185341e-05 - 4.585832357406616e-05
-P0 (transit): 1.0914195006314042 + 2.0790877908183347e-08 - 1.9656896332875817e-08
+t0 (transit): 2454508.978941705 + 4.644179716706276e-05 - 4.6664848923683167e-05
+P0 (transit): 1.0914194874148295 + 2.0467165517956687e-08 - 2.0426244917715053e-08
 
 DECAY MODEL:
-t0 (transit): 2454508.976206188 + 7.696636021137238e-05 - 7.622223347425461e-05
-P0 (transit): 1.091422168511235 + 8.294883624415661e-08 - 8.65025684415599e-08
-PdE (transit): -1.1861151993575246e-09 + 3.797866863275066e-11 - 3.570294672699221e-11
-PdT (transit): -34.295573330989846 + 1.098122860084232 - 1.0323221793896804
+t0 (transit): 2454508.9771983447 + 7.37910158932209e-05 - 7.39293172955513e-05
+P0 (transit): 1.09142194562209 + 8.371737747481234e-08 - 8.354027358770111e-08
+PdE (transit): -1.0929012268789573e-09 + 3.6291487492878124e-11 - 3.5869160037977084e-11
+PdT (transit): -31.60037224439088 + 1.049339579709905 - 1.0371283162803535
 
 PRECESSION MODEL:
-t0 (transit): 2454508.969034184 + 0.0008613136596977711 - 0.0006090821698307991
-Ps (transit): 1.0914194962752275 + 2.0686910184863905e-08 - 2.061203518977095e-08
-e (transit): 0.029292425817275067 + 0.001761396102335274 - 0.002440446204276449
-w0 (transit): 2.3606089473474796 + 0.026076921121455765 - 0.041118312338838336
-wdE (transit): 0.00034656071608454137 + 1.7773255430349514e-05 - 1.0997649733655661e-05
+t0 (transit): 2454508.970007208 + 0.001350531354546547 - 0.0007536620832979679
+Ps (transit): 1.091419481302197 + 2.0326860861175078e-08 - 2.032026813481025e-08
+e (transit): 0.028697329081591613 + 0.0021673374435088877 - 0.0038789680603087476
+w0 (transit): 2.382071050626168 + 0.031252633718609424 - 0.05949079522495593
+wdE (transit): 0.00033639079600900166 + 2.6143924199895498e-05 - 1.3306731072866345e-05
 
 MODEL COMPARISON:
-Linear model: chi^2 = 2439.0  BIC = 2449.7
-Decay model: chi^2 = 1911.2  BIC = 1927.3
-Precession model: chi^2 = 1920.5  BIC = 1947.3
+Linear model: chi^2 = 2342.4  BIC = 2353.1
+Decay model: chi^2 = 1895.7  BIC = 1911.8
+Precession model: chi^2 = 1902.6  BIC = 1929.4
 ```
 
 
