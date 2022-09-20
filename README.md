@@ -1,7 +1,7 @@
 # ExoPdot
 
 This repository contains source code, data, and a summary of results from the *"Evidence of Long-Term Period Variations in the 
-Exoplanet Transit Database (ETD)"* paper by Hagey, Edwards, and Boley (2022).
+Exoplanet Transit Database (ETD)"* paper by Hagey, Edwards, and Boley (2022). All data used for this paper are from the [Exoplanet Transit Database (ETD)](http://var2.astro.cz/ETD/index.php). If you are using it for your research please be sure to cite the database appropriately.
 
 The main function of this code is to process the transit center 
 times provided in the ~/DATA/ folder and compare three different transit timing models: 
@@ -11,10 +11,6 @@ orbital period, but the orbit is precessing. The best-fit models are found throu
 an (optional) iterative sigma-clipping algorithm is incorporated into the pipeline to handle the exclusion of spurious data points. 
 
 ### Data
-
-All data used for this paper are from the [Exoplanet Transit Database (ETD)](http://var2.astro.cz/ETD/index.php).
-If you are using it for your research please be sure to cite the database appropriately.
- 
 Data of all 30 star-planet systems investigated in the study are available in tab-separated .txt files in the ~/DATA/ folder. 
 For the top 10 targets of interest (see paper) we provide datasets that have been manually cleaned of partial 
 transits and duplicate submissions. The columns contain the ETD submission number, epoch, transit center in BJD(TDB), 
