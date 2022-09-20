@@ -1,6 +1,6 @@
 # ExoPdot
 
-This repository contains source code, data, and a summary of results from *"Evidence of Long-Term Period Variations in the 
+This repository contains source code, data, and a summary of results from the *"Evidence of Long-Term Period Variations in the 
 Exoplanet Transit Database (ETD)"* paper by Hagey, Edwards, and Boley (2022).
 
 The main function of this code is to process the transit center 
@@ -12,7 +12,7 @@ an (optional) iterative sigma-clipping algorithm is incorporated into the pipeli
 
 ### Data
 
-All data used for this paper is from the [Exoplanet Transit Database (ETD)](http://var2.astro.cz/ETD/index.php).
+All data used for this paper are from the [Exoplanet Transit Database (ETD)](http://var2.astro.cz/ETD/index.php).
 If you are using it for your research please be sure to cite the database appropriately.
  
 Data of all 30 star-planet systems investigated in the study are available in tab-separated .txt files in the ~/DATA/ folder. 
@@ -21,7 +21,7 @@ transits and duplicate submissions. The columns contain the ETD submission numbe
 uncertainty (days), data quality (DQ) factor, and source/observer.
 
 ```
-#   Epoch   T_mid (HJD)    Unc. (days)  DQ  Source
+#   Epoch   T_mid (BJD)    Unc. (days)  DQ  Source
 1   0       2455528.86853   0.00014     1   Hellier et al. 2011
 4   497     2455933.16473   0.00025     1   Starr P.
 5   505     2455939.67475   0.00052     2   Naves R.
