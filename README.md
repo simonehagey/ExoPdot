@@ -1,4 +1,4 @@
-# ExoPdot
+# ExoPdot [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7098460.svg)](https://doi.org/10.5281/zenodo.7098460)
 
 This repository contains source code, data, and a summary of results from the *"Evidence of Long-Term Period Variations in the 
 Exoplanet Transit Database (ETD)"* paper by Hagey, Edwards, and Boley (2022). All data used for this paper are from the [Exoplanet Transit Database (ETD)](http://var2.astro.cz/ETD/index.php). If you are using it for your research please be sure to cite the database appropriately.
